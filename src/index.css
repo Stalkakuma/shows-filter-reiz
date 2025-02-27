@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background-dark: #1c1b21;
+  --color-white: #f4f4f4;
+  --color-brown: #554442;
+  --color-active-dark: #90f793;
+  --color-dormant-dark: #2b2a33;
+  --color-dormant-light: #d3d3d3;
+  --shadow-dark: 0px 0px 10px 5px #848389;
+  --shadow-light: 0px 0px 10px 5px #919191;
+}
+
+@layer base {
+  /* h1 {
+    font-size: var(--text-2xl);
+  } */
+  h2 {
+    font-size: var(--text-xl);
+  }
+}

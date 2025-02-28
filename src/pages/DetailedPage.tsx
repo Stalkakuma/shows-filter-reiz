@@ -1,0 +1,76 @@
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ShowType } from "../types";
+import { getSpecificShow } from "../misc/apiShowService";
+import { SummarySanitized } from "../components/helpers/SummarySanitized";
+import { formatDate } from "../components/helpers/misc";
+
+export const DetailedPage = () => {
+  const { id } = useParams();
+  const [showData, setShowData] = useState<ShowType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getShowData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await getSpecificShow(id as string);
+        setShowData(response.data);
+      } catch (error) {
+        console.error("Error getting show data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getShowData();
+  }, [id]);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <section className="grid  md:grid-cols-3 sm:grid-cols-2 grid-cols-1 md:grid-rows-2 sm:grid-rows-2 row-auto">
+      <div className="col-start-1 md:row-span-2 p-4">
+        <img src={showData?.image.original} alt="Show's Image" />
+      </div>
+      <div className="flex md:col-span-2 col-span-1 md:col-start-2 sm:col-start-2 col-start-1 flex-col p-4">
+        <h1>{showData?.name}</h1>
+        <SummarySanitized
+          summary={showData?.summary as string}
+          isClamped={false}
+        />
+      </div>
+      <div className="md:row-start-2 md:col-start-2  md:place-content-end p-4">
+        {showData?.premiered && (
+          <p>Premiered: {formatDate(showData.premiered)}</p>
+        )}
+        {showData?.ended && <p>Ended: {formatDate(showData.ended)}</p>}
+        {showData?.averageRuntime && (
+          <p>Average runtime: {showData.averageRuntime} minutes</p>
+        )}
+        {showData?.status && <p>Show's status: {showData.status}</p>}
+        {showData?.language && <p>Language: {showData.language}</p>}
+        {showData?.rating && <p>Average rating: {showData.rating.average}</p>}
+        {showData?.officialSite && (
+          <p>
+            Official site:{" "}
+            <a href={showData.officialSite} target="_blank">
+              Go to official site
+            </a>
+          </p>
+        )}
+        {showData?.genres && (
+          <ul className="flex gap-1">
+            {showData.genres.map((genre, index) => (
+              <li key={index}>
+                {genre}
+                {index !== showData.genres.length - 1 ? ", " : ""}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  );
+};

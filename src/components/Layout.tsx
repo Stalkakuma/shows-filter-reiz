@@ -7,7 +7,9 @@ export const Layout = ({ children }: PropsWithChildren) => {
       <header className="col-start-2 col-span-1  p-4  place-content-center ">
         <Navbar />
       </header>
-      <main className="col-start-2 col-span-1 p-4">{children}</main>
+      <main className="col-start-2 col-span-1 p-4 mr-auto ml-auto  max-w-7xl">
+        {children}
+      </main>
     </div>
   );
 };

@@ -12,4 +12,9 @@ export const getShows = async () => {
   return response;
 };
 
+export const getSpecificShow = async (id: string) => {
+  const response = await apiShowClient.get(`/shows/${id}`);
+  return response;
+};
+
 export default apiShowClient;

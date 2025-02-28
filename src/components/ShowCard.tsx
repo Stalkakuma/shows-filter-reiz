@@ -1,15 +1,23 @@
 import { ShowType } from "../types";
 import { SummarySanitized } from "./helpers/SummarySanitized";
 import NoImage from "../assets/No_Image.jpg";
+import { useNavigate } from "react-router";
 
 type ShowProps = {
   show: ShowType;
 };
 
 export const ShowCard = ({ show }: ShowProps) => {
-  const { name, image, summary, rating, genres } = show;
+  const { id, name, image, summary, rating, genres } = show;
+  let navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(`show/${id}`);
+  };
   return (
-    <div className="flex cursor-pointer rounded-sm dark:hover:shadow-dark hover:shadow-light">
+    <div
+      className="flex cursor-pointer rounded-sm dark:hover:shadow-dark hover:shadow-light"
+      onClick={handleNavigate}
+    >
       <div className="max-w-50 min-w-40 p-2">
         <img src={image ? image.medium : NoImage} alt="Show's image" />
       </div>

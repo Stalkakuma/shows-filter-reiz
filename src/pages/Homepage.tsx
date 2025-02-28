@@ -89,7 +89,7 @@ export const Homepage = () => {
   };
 
   return (
-    <div className="flex-col  mr-auto ml-auto  max-w-7xl">
+    <div className="flex flex-col">
       <h1>{isLoading && "Loading..."}</h1>
       {!filteredShows.length && <p>No Matches</p>}
       <FiltersWidget {...filteringProps} />

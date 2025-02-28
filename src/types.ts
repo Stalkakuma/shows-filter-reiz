@@ -5,6 +5,9 @@ export interface ShowType {
   summary: string;
   status: string;
   premiered: string;
+  ended: string;
+  language: string;
+  officialSite: string;
   rating: {
     average: number;
   };

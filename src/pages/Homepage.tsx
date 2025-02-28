@@ -54,9 +54,6 @@ export const Homepage = () => {
         show.genres.every((genre) => selectedGenres.includes(genre)))
   );
 
-  console.log(selectedGenres);
-  console.log(filteredShows);
-
   const sortedShows =
     sortOrder === "None"
       ? filteredShows

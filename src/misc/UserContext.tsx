@@ -5,7 +5,6 @@ import {
   useContext,
   PropsWithChildren,
 } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
 
 type ThemeContextType = "light" | "dark";
 
@@ -17,23 +16,10 @@ interface StoreContext {
 export const UserContext = createContext<StoreContext | undefined>(undefined);
 
 export const StoreProvider = ({ children }: PropsWithChildren) => {
-  //   const [theme, setTheme] = useState<"light" | "dark">(
-  //     typeof window !== "undefined" &&
-  //       window.matchMedia("(prefers-color-scheme: dark)").matches
-  //       ? "dark"
-  //       : "light"
-  //   );
-  const [theme, setTheme] = useState<ThemeContextType>("dark");
-
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [theme]);
+  const [theme, setTheme] =
+    useState<ThemeContextType>(
+      localStorage.getItem("theme") as "light" | "dark"
+    ) || "dark";
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") as
@@ -44,6 +30,16 @@ export const StoreProvider = ({ children }: PropsWithChildren) => {
       setTheme(storedTheme);
     }
   }, []);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [theme]);
 
   const changeTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));

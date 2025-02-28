@@ -63,12 +63,13 @@ export const FiltersWidget = ({
               {allGenres.map((genre) => (
                 <li
                   key={genre}
-                  onClick={() => genreToggle(genre)}
                   className="flex items-center p-2 cursor-pointer hover:bg-gray-200"
+                  onClick={() => genreToggle(genre)}
                 >
                   <input
                     type="checkbox"
                     checked={selectedGenres.includes(genre)}
+                    onChange={() => genreToggle(genre)}
                     className="mr-2"
                   />
                   <span>{genre}</span>

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
 import { Layout } from "./components/Layout";
 import { StoreProvider } from "./misc/UserContext";
 import { Homepage } from "./pages/Homepage";
@@ -10,7 +10,9 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/show/:id" element={<DetailedPage />} />
+          <Route path="show">
+            <Route path=":id" element={<DetailedPage />} />
+          </Route>
         </Routes>
       </Layout>
     </StoreProvider>

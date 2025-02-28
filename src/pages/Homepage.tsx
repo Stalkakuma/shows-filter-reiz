@@ -88,12 +88,15 @@ export const Homepage = () => {
     genreToggle,
   };
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="flex flex-col">
-      <h1>{isLoading && "Loading..."}</h1>
       {!filteredShows.length && <p>No Matches</p>}
       <FiltersWidget {...filteringProps} />
-      <section className="grid md:grid-cols-2 grid-cols-1 gap-3">
+      <section className="grid md:grid-cols-2 sm:grid-cols-2 grid-cols-1 md:gap-3 sm:gap-2 gap-1">
         {currentShows.map((show: ShowType) => (
           <ShowCard key={show.id} show={show} />
         ))}

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { ShowType } from "../types";
 import { getSpecificShow } from "../misc/apiShowService";

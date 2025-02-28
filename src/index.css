@@ -22,4 +22,22 @@
     font-size: var(--text-xl);
     font-weight: bold;
   }
+
+  @media (min-width: 768px) {
+    html {
+      @apply text-base;
+    }
+  }
+
+  @media (max-width: 767px) {
+    html {
+      @apply text-sm;
+    }
+  }
+
+  @media (max-width: 639px) {
+    html {
+      @apply text-xs;
+    }
+  }
 }

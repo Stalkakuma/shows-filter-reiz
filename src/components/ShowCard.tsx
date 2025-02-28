@@ -20,11 +20,15 @@ export const ShowCard = ({ show }: ShowProps) => {
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col dark:brightness-75 dark:opacity-100 opacity-50">
-            <p>Rating</p>
-            <p className="">
-              {rating.average}
-              <span> / 10</span>
-            </p>
+            {rating.average > 0 && (
+              <>
+                <p>Rating</p>
+                <p>
+                  {rating.average}
+                  <span> / 10</span>
+                </p>
+              </>
+            )}
           </div>
           <ul className="flex items-end gap-1">
             {genres.map((genre, index) => (

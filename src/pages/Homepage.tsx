@@ -3,6 +3,7 @@ import { getShows } from "../misc/apiShowService";
 import { ShowCard } from "../components/ShowCard";
 import { ShowType } from "../types";
 import { getPaginationButtons } from "../components/helpers/Pagination";
+import { FiltersWidget } from "../components/FiltersWidget";
 
 export const Homepage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,9 +12,14 @@ export const Homepage = () => {
   const showsPerPage = 8;
   const [selectedStatus, setSelectedStatus] = useState<string>("All");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState("None");
-  const sortingOrders = ["None", "A → Z", "Z → A"];
+  const sortingOrders = [
+    "None",
+    "Name ascending",
+    "Name descending",
+    "Premiered ascending",
+    "Premiered descending",
+  ];
 
   const statuses = ["All", ...new Set(showsData.map((show) => show.status))];
   const allGenres = Array.from(
@@ -45,16 +51,23 @@ export const Homepage = () => {
     (show) =>
       (selectedStatus === "All" || show.status === selectedStatus) &&
       (selectedGenres.length === 0 ||
-        show.genres.some((genre) => selectedGenres.includes(genre)))
+        show.genres.every((genre) => selectedGenres.includes(genre)))
   );
+
+  console.log(selectedGenres);
+  console.log(filteredShows);
 
   const sortedShows =
     sortOrder === "None"
       ? filteredShows
       : [...filteredShows].sort((a, b) =>
-          sortOrder === "A → Z"
+          sortOrder === "Name ascending"
             ? a.name.localeCompare(b.name)
-            : b.name.localeCompare(a.name)
+            : sortOrder === "Name descending"
+            ? b.name.localeCompare(a.name)
+            : sortOrder === "Premiered ascending"
+            ? Date.parse(a.premiered) - Date.parse(b.premiered)
+            : Date.parse(b.premiered) - Date.parse(a.premiered)
         );
 
   const indexOfLastShow = currentPage * showsPerPage;
@@ -66,71 +79,23 @@ export const Homepage = () => {
     setCurrentPage(page);
   };
 
+  const filteringProps = {
+    sortOrder,
+    sortingOrders,
+    setSortOrder,
+    selectedStatus,
+    statuses,
+    setSelectedStatus,
+    selectedGenres,
+    allGenres,
+    genreToggle,
+  };
+
   return (
     <div className="flex-col  mr-auto ml-auto  max-w-7xl">
       <h1>{isLoading && "Loading..."}</h1>
-      <section className="flex">
-        <div className="relative">
-          <select
-            className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-          >
-            {sortingOrders.map((order) => (
-              <option key={order} value={order}>
-                {order}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="relative">
-          <select
-            className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-          >
-            {statuses.map((showStatus) => (
-              <option key={showStatus} value={showStatus}>
-                {showStatus}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Multi-Select Dropdown */}
-        <div className="relative mb-4">
-          <button
-            className="w-full px-4 py-2 border rounded text-left flex justify-between items-center"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          >
-            {selectedGenres.length > 0
-              ? selectedGenres.join(", ")
-              : "Select Genres"}
-            <span className="ml-2">{isDropdownOpen ? "▲" : "▼"}</span>
-          </button>
-
-          {isDropdownOpen && (
-            <div className="absolute w-full mt-2  border rounded shadow-lg z-10">
-              <ul className="max-h-48 overflow-y-auto p-2">
-                {allGenres.map((genre) => (
-                  <li
-                    key={genre}
-                    className="flex items-center p-2 hover:bg-gray-200"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedGenres.includes(genre)}
-                      onChange={() => genreToggle(genre)}
-                      className="mr-2"
-                    />
-                    <span>{genre}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      </section>
+      {!filteredShows.length && <p>No Matches</p>}
+      <FiltersWidget {...filteringProps} />
       <section className="grid md:grid-cols-2 grid-cols-1 gap-3">
         {currentShows.map((show: ShowType) => (
           <ShowCard key={show.id} show={show} />

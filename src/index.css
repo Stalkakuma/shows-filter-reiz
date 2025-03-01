@@ -9,6 +9,8 @@
   --color-active-dark: #90f793;
   --color-dormant-dark: #2b2a33;
   --color-dormant-light: #d3d3d3;
+  --color-heart-filled: #39393e;
+  --color-heart-stroke: #565656;
   --shadow-dark: 0px 0px 10px 5px #848389;
   --shadow-light: 0px 0px 10px 5px #919191;
 }

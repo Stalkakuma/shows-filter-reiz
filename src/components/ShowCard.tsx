@@ -2,6 +2,8 @@ import { ShowType } from "../types";
 import { SummarySanitized } from "./helpers/SummarySanitized";
 import NoImage from "../assets/No_Image.jpg";
 import { useNavigate } from "react-router";
+import { useUserContext } from "../misc/UserContext";
+import Heart from "../assets/heart.svg?react";
 
 type ShowProps = {
   show: ShowType;
@@ -9,20 +11,40 @@ type ShowProps = {
 
 export const ShowCard = ({ show }: ShowProps) => {
   const { id, name, image, summary, rating, genres } = show;
+  const { user, addToFavorites, removeFromFavorites } = useUserContext();
+  const isFavorite = user.favorites.includes(id);
   let navigate = useNavigate();
   const handleNavigate = () => {
     navigate(`show/${id}`);
   };
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+      removeFromFavorites(id);
+    } else {
+      addToFavorites(id);
+    }
+  };
   return (
-    <div
-      className="flex cursor-pointer rounded-sm dark:hover:shadow-dark hover:shadow-light"
-      onClick={handleNavigate}
-    >
-      <div className="md:min-w-35 sm:min-w-25 min-w-35 p-2">
+    <div className="flex z-10  rounded-sm dark:hover:shadow-dark hover:shadow-light">
+      <div
+        className="md:min-w-35 sm:min-w-25 min-w-35 p-2 cursor-pointer"
+        onClick={handleNavigate}
+      >
         <img src={image ? image.medium : NoImage} alt="Show's image" />
       </div>
       <div className="flex flex-col justify-between relative md:p-4 p-1">
-        <div>
+        <button
+          onClick={handleFavorite}
+          className="absolute cursor-pointer top-0 right-0 z-20 p-2"
+        >
+          <Heart
+            className={`${
+              isFavorite ? "stroke-active-dark" : "stroke-heart-stroke"
+            } dark:fill-heart-filled`}
+          />
+        </button>
+        <div className="cursor-pointer" onClick={handleNavigate}>
           <h2>{name}</h2>
           <SummarySanitized summary={summary} isClamped={true} />
         </div>

@@ -4,11 +4,14 @@ import { ShowType } from "../types";
 import { getSpecificShow } from "../misc/apiShowService";
 import { SummarySanitized } from "../components/helpers/SummarySanitized";
 import { formatDate } from "../components/helpers/misc";
+import { useUserContext } from "../misc/UserContext";
 
 export const DetailedPage = () => {
   const { id } = useParams();
   const [showData, setShowData] = useState<ShowType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { user, addToFavorites, removeFromFavorites } = useUserContext();
+  const isFavorite = user.favorites.includes(parseInt(id as string));
 
   useEffect(() => {
     const getShowData = async () => {
@@ -25,6 +28,14 @@ export const DetailedPage = () => {
     getShowData();
   }, [id]);
 
+  const handleFavorite = () => {
+    if (isFavorite) {
+      removeFromFavorites(parseInt(id as string));
+    } else {
+      addToFavorites(parseInt(id as string));
+    }
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -34,8 +45,18 @@ export const DetailedPage = () => {
       <div className="col-start-1 md:row-span-2 p-4">
         <img src={showData?.image.original} alt="Show's Image" />
       </div>
-      <div className="flex md:col-span-2 col-span-1 md:col-start-2 sm:col-start-2 col-start-1 flex-col p-4">
-        <h1>{showData?.name}</h1>
+      <div className="flex md:gap-8 gap-5 md:col-span-2 col-span-1 md:col-start-2 sm:col-start-2 col-start-1 flex-col p-4">
+        <div>
+          <h1>{showData?.name}</h1>
+          <button
+            className={`cursor-pointer underline ${
+              isFavorite ? "text-active-dark" : ""
+            }`}
+            onClick={handleFavorite}
+          >
+            {isFavorite ? "FAVORITE" : "ADD TO FAVORITES"}
+          </button>
+        </div>
         <SummarySanitized
           summary={showData?.summary as string}
           isClamped={false}
@@ -55,7 +76,11 @@ export const DetailedPage = () => {
         {showData?.officialSite && (
           <p>
             Official site:{" "}
-            <a href={showData.officialSite} target="_blank">
+            <a
+              className="underline text-active-dark"
+              href={showData.officialSite}
+              target="_blank"
+            >
               Go to official site
             </a>
           </p>

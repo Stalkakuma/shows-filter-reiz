@@ -23,7 +23,12 @@ interface StoreContext {
 export const UserContext = createContext<StoreContext | undefined>(undefined);
 
 export const UserProvider = ({ children }: PropsWithChildren) => {
-  const [user, setUser] = useState<User>({ favorites: [], theme: "dark" });
+  const [user, setUser] = useState<User>(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser
+      ? JSON.parse(storedUser)
+      : { favorites: [], theme: "dark" };
+  });
 
   const getUser = (): User | null => {
     const user = localStorage.getItem("user");

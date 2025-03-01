@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getShows } from "../misc/apiShowService";
-import { ShowCard } from "../components/ShowCard";
 import { ShowType } from "../types";
 import { getPaginationButtons } from "../components/helpers/Pagination";
 import { FiltersWidget } from "../components/FiltersWidget";
+import { ShowList } from "../components/ShowList";
 
 export const Homepage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -96,11 +96,8 @@ export const Homepage = () => {
     <div className="flex flex-col">
       {!filteredShows.length && <p>No Matches</p>}
       <FiltersWidget {...filteringProps} />
-      <section className="grid md:grid-cols-2 sm:grid-cols-2 grid-cols-1 md:gap-3 sm:gap-2 gap-1">
-        {currentShows.map((show: ShowType) => (
-          <ShowCard key={show.id} show={show} />
-        ))}
-      </section>
+      <ShowList shows={currentShows} />
+
       <div className="flex justify-center mt-4 space-x-2">
         {getPaginationButtons(totalPages, currentPage).map((page, index) =>
           page === "..." ? (

@@ -15,7 +15,7 @@ export const ShowCard = ({ show }: ShowProps) => {
   const isFavorite = user.favorites.includes(id);
   let navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(`show/${id}`);
+    navigate(`/show/${id}`);
   };
 
   const handleFavorite = () => {
@@ -25,6 +25,7 @@ export const ShowCard = ({ show }: ShowProps) => {
       addToFavorites(id);
     }
   };
+
   return (
     <div className="flex z-10  rounded-sm dark:hover:shadow-dark hover:shadow-light">
       <div

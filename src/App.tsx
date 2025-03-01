@@ -3,6 +3,7 @@ import { Layout } from "./components/Layout";
 import { UserProvider } from "./misc/UserContext";
 import { Homepage } from "./pages/Homepage";
 import { DetailedPage } from "./pages/DetailedPage";
+import { Favorites } from "./pages/Favorites";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="favorites" element={<Favorites />} />
           <Route path="show">
             <Route path=":id" element={<DetailedPage />} />
           </Route>

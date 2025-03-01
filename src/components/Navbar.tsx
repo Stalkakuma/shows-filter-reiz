@@ -20,7 +20,12 @@ export const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/favorites">Favorites</NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "underline" : "")}
+            to="/favorites"
+          >
+            Favorites
+          </NavLink>
         </li>
       </ul>
     </nav>

@@ -3,14 +3,14 @@ import { Navbar } from "./Navbar";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="grid min-w-fit dark:bg-background-dark  bg-white dark:text-white text-brown grid-cols-[auto_1fr_auto] grid-rows-[100px_minmax(900px,1fr)]  min-h-screen">
-      <header className="col-start-2 col-span-1 place-content-center ">
+    <div className="grid max-w-screen-xl mx-auto w-full grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto]  min-h-screen">
+      <header className="flex  items-center justify-center col-start-2 col-span-1 p-4">
         <Navbar />
       </header>
-      <main className="col-start-2 col-span-1 md:px-4 sm:px-8 px-16 mr-auto ml-auto  md:max-w-7xl">
+      <main className="flex items-start justify-center col-start-2 col-span-1 p-4">
         {children}
       </main>
-      <footer className="col-start-2 col-span-1 p-5 mr-auto ml-auto  md:max-w-7xl">
+      <footer className="flex items-center justify-center col-start-2 col-span-1 p-4">
         <p>© 2025 ReizTech</p>
       </footer>
     </div>

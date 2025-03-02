@@ -17,6 +17,9 @@
 }
 
 @layer base {
+  body {
+    @apply dark:bg-background-dark bg-white dark:text-white text-brown;
+  }
   h1 {
     font-size: var(--text-4xl);
     font-weight: bold;

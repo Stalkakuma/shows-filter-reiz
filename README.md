@@ -1,48 +1,63 @@
-# React + TypeScript + Vite
+# **Filter Shows**
 
-Currently, two official plugins are available:
+Discover explore and savo your favorite shows and their information effortlessly! Powered by React-Vite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## **Table of Contents**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. [Features](#features)
+2. [Installation](#installation)
+   - [Frontend Setup](#frontend-setup)
+3. [Usage](#usage)
+4. [Technologies](#technologies)
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+## **Features**
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- 🎥 **Search**: Quickly find movies and tv shows by title.
+- ⭐ **Detailed Information**: View ratings, synopsis and more.
+- ❤️ **Save Favorites**: Create your own list of favorite shows!
+- 🧭 **User-Friendly Interface**: Intuitive and responsive design for a seamless experience.
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+---
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
+## **Installation**
+
+To get Shows-Filter-Reiz up and running locally, follow these steps:
+
+### **Frontend Setup**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Stalkakuma/shows-filter-reiz.git
+   ```
+2. Navigate to the frontend directory:
+   ```bash
+   cd shows-filter-reiz
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+The React-Vite app will run at http://localhost:5173.
+
+## **Usage**
+
+1. Open the frontend in your browser: [http://localhost:5173](http://localhost:5173).
+2. Use the filters and sorting bar to find and differentiate between shows.
+3. Click on a movie to view detailed information.
+
+## **Technologies**
+
+### **Frontend**
+
+- [React-Vite](https://vitejs.dev/)
+- [Axios](https://axios-http.com/)
+- [Tailwind](https://tailwindcss.com/)

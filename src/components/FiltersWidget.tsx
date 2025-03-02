@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Carret from "../assets/caret.svg?react";
 
 type FiltersWidgedProps = {
   sortOrder: string;
@@ -12,6 +13,13 @@ type FiltersWidgedProps = {
   genreToggle: (genre: string) => void;
 };
 
+type ButtonProps = {
+  buttonValue: string;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  buttonIsSort?: boolean;
+};
+
 export const FiltersWidget = ({
   sortOrder,
   sortingOrders,
@@ -23,47 +31,79 @@ export const FiltersWidget = ({
   allGenres,
   genreToggle,
 }: FiltersWidgedProps) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isSelectGenresOpen, setIsSelectGenresOpen] = useState(false);
+  const [isSelectStatusOpen, setIsSelectStatusOpen] = useState(false);
 
-  //TODO Constistent drowpdown styles
+  const Button = ({
+    buttonValue,
+    isOpen,
+    setIsOpen,
+    buttonIsSort,
+  }: ButtonProps) => {
+    const handleDropdown = () => {
+      setIsOpen(!isOpen);
+    };
+    return (
+      <button
+        className="md:w-full flex justify-between dark:bg-dormant-dark bg-dormant-light  cursor-pointer  min-w-50 px-4 py-2 focus:ring-2 focus:ring-active-dark hover:border-active-dark border rounded-lg text-left"
+        onClick={handleDropdown}
+      >
+        {buttonValue}
+        {buttonIsSort && (
+          <Carret
+            className={`${
+              isOpen ? "transform-flat rotate-x-180" : ""
+            } max-w-5 h-5 dark:stroke-white`}
+          />
+        )}
+      </button>
+    );
+  };
+
   return (
-    <section className="flex md:flex-row flex-col gap-4 mb-5">
-      <div className="relative">
-        <select
-          className="block md:w-full w-50 cursor-pointer px-4 py-2  border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-active-dark focus:border-active-dark"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          {sortingOrders.map((order) => (
-            <option
-              className="bg-white dark:bg-background-dark "
-              key={order}
-              value={order}
-            >
-              {order}
-            </option>
-          ))}
-        </select>
+    <section className="flex sm:flex-row   md:flex-row flex-col md:gap-4 sm:gap-2 gap-2 mb-5">
+      <div className="relative dark:bg-dormant-dark bg-dormant-light rounded-lg">
+        <Button
+          buttonValue={sortOrder}
+          setIsOpen={setIsSortOpen}
+          isOpen={isSortOpen}
+          buttonIsSort={true}
+        />
+        {isSortOpen && (
+          <div className="absolute w-full min-w-60 z-30 mt-2  bg-white dark:bg-background-dark border-2 rounded-xl shadow-lg overflow-hidden">
+            <ul>
+              {sortingOrders.map((order) => (
+                <li
+                  key={order}
+                  className="flex items-center p-2 cursor-pointer  hover:bg-dropdown-active hover:text-white"
+                  onClick={() => (setSortOrder(order), setIsSortOpen(false))}
+                >
+                  {order}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <div className="relative">
         <button
-          className="md:w-full w-50 min-w-50 px-4 py-2 border rounded text-left flex justify-between items-center"
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          className="md:w-full  dark:bg-dormant-dark bg-dormant-light  cursor-pointer  min-w-50 px-4 py-2 focus:ring-2 focus:ring-active-dark hover:border-active-dark border rounded-lg text-left "
+          onClick={() => setIsSelectGenresOpen(!isSelectGenresOpen)}
         >
           {`Selected Genres ${
             selectedGenres.length != 0 ? `(${selectedGenres.length})` : ""
           }`}
-          <span className="ml-2">{isDropdownOpen ? "▲" : "▼"}</span>
         </button>
 
-        {isDropdownOpen && (
-          <div className="absolute w-full mt-2 bg-white dark:bg-background-dark border rounded shadow-lg z-10">
-            <ul className="max-h-48 overflow-y-auto p-2">
+        {isSelectGenresOpen && (
+          <div className="absolute w-full min-w-60 z-30 mt-2  bg-white dark:bg-background-dark border-2 rounded-xl shadow-lg overflow-hidden">
+            <ul className="max-h-50 overflow-y-auto ">
               {allGenres.map((genre) => (
                 <li
                   key={genre}
-                  className="flex items-center p-2 cursor-pointer hover:bg-gray-200"
+                  className="flex items-center p-2 cursor-pointer  hover:bg-dropdown-active hover:text-white"
                   onClick={() => genreToggle(genre)}
                 >
                   <input
@@ -81,21 +121,28 @@ export const FiltersWidget = ({
       </div>
 
       <div className="relative">
-        <select
-          className="block md:w-full w-50 px-4 py-2 cursor-pointer border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-active-dark focus:border-active-dark"
-          value={selectedStatus}
-          onChange={(e) => setSelectedStatus(e.target.value)}
-        >
-          {statuses.map((showStatus) => (
-            <option
-              className="bg-white dark:bg-background-dark"
-              key={showStatus}
-              value={showStatus}
-            >
-              {showStatus}
-            </option>
-          ))}
-        </select>
+        <Button
+          buttonValue={selectedStatus}
+          isOpen={isSelectStatusOpen}
+          setIsOpen={setIsSelectStatusOpen}
+        />
+        {isSelectStatusOpen && (
+          <div className="absolute w-full min-w-60 z-30 mt-2  bg-white dark:bg-background-dark border-2 rounded-xl shadow-lg overflow-hidden">
+            <ul>
+              {statuses.map((status) => (
+                <li
+                  key={status}
+                  className="flex items-center p-2 cursor-pointer  hover:bg-dropdown-active hover:text-white"
+                  onClick={() => (
+                    setSelectedStatus(status), setIsSelectStatusOpen(false)
+                  )}
+                >
+                  {status}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );

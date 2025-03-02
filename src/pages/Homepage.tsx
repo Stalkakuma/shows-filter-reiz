@@ -12,9 +12,9 @@ export const Homepage = () => {
   const showsPerPage = 8;
   const [selectedStatus, setSelectedStatus] = useState<string>("All");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  const [sortOrder, setSortOrder] = useState("None");
+  const [sortOrder, setSortOrder] = useState("No sort");
   const sortingOrders = [
-    "None",
+    "No sort",
     "Name ascending",
     "Name descending",
     "Premiered ascending",
@@ -55,7 +55,7 @@ export const Homepage = () => {
   );
 
   const sortedShows =
-    sortOrder === "None"
+    sortOrder === "No sort"
       ? filteredShows
       : [...filteredShows].sort((a, b) =>
           sortOrder === "Name ascending"

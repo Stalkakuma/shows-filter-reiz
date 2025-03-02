@@ -11,6 +11,7 @@
   --color-dormant-light: #d3d3d3;
   --color-heart-filled: #39393e;
   --color-heart-stroke: #565656;
+  --color-dropdown-active: #1b66d3;
   --shadow-dark: 0px 0px 10px 5px #848389;
   --shadow-light: 0px 0px 10px 5px #919191;
 }
@@ -21,7 +22,7 @@
     font-weight: bold;
   }
   h2 {
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
     font-weight: bold;
   }
 

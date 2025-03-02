@@ -20,6 +20,9 @@
   body {
     @apply dark:bg-background-dark bg-white dark:text-white text-brown;
   }
+  html {
+    scrollbar-gutter: stable;
+  }
   h1 {
     font-size: var(--text-4xl);
     font-weight: bold;

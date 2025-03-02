@@ -41,7 +41,9 @@ export const ShowCard = ({ show }: ShowProps) => {
         >
           <Heart
             className={`${
-              isFavorite ? "stroke-active-dark" : "stroke-heart-stroke"
+              isFavorite
+                ? "stroke-active-dark fill-active-dark"
+                : "stroke-heart-stroke dark:fill-none"
             } dark:fill-heart-filled`}
           />
         </button>

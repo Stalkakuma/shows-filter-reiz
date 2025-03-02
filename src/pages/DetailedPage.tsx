@@ -41,16 +41,20 @@ export const DetailedPage = () => {
   }
 
   return (
-    <section className="grid  md:grid-cols-3 sm:grid-cols-2 grid-cols-1 md:grid-rows-2 sm:grid-rows-2 row-auto">
-      <div className="col-start-1 md:row-span-2 p-4">
-        <img src={showData?.image.original} alt="Show's Image" />
+    <section className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 md:grid-rows-2 sm:grid-rows-2 row-auto">
+      <div className="col-start-1  md:row-span-2 md:p-2 p-1">
+        <img
+          className="w-full h-full object-cover md:rounded-lg"
+          src={showData?.image.original}
+          alt="Show's Image"
+        />
       </div>
-      <div className="flex md:gap-8 gap-5 md:col-span-2 col-span-1 md:col-start-2 sm:col-start-2 col-start-1 flex-col p-4">
+      <div className="flex md:gap-8 gap-5 md:col-span-2 col-span-1 md:col-start-2 sm:col-start-2 col-start-1 flex-col sm:py-0 py-1 px-1 md:px-2">
         <div>
           <h1>{showData?.name}</h1>
           <button
-            className={`cursor-pointer underline ${
-              isFavorite ? "text-active-dark" : ""
+            className={`cursor-pointer underline brightness-50 hover:text-active-dark hover:brightness-120 duration-300 ease-in ${
+              isFavorite ? "text-active-dark brightness-100 " : ""
             }`}
             onClick={handleFavorite}
           >
@@ -62,7 +66,7 @@ export const DetailedPage = () => {
           isClamped={false}
         />
       </div>
-      <div className="md:row-start-2 md:col-start-2  md:place-content-end p-4">
+      <div className="md:row-start-2 md:col-start-2  md:place-content-end md:p-2 p-1">
         {showData?.premiered && (
           <p>Premiered: {formatDate(showData.premiered)}</p>
         )}
@@ -77,7 +81,7 @@ export const DetailedPage = () => {
           <p>
             Official site:{" "}
             <a
-              className="underline text-active-dark"
+              className="underline text-active-dark hover:brightness-120 duration-300 ease-in"
               href={showData.officialSite}
               target="_blank"
             >

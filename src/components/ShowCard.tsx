@@ -27,13 +27,13 @@ export const ShowCard = ({ show }: ShowProps) => {
   };
 
   return (
-    <div className="flex z-10  rounded-sm dark:hover:shadow-dark hover:shadow-light">
+    <div className="flex min-h-60 z-10  rounded-sm dark:hover:shadow-dark hover:shadow-light">
       <div
-        className="md:w-35 sm:min-w-35 min-w-35 md:p-2 p-1  cursor-pointer"
+        className="h-full min-w-40 md:p-2 p-1 cursor-pointer"
         onClick={handleNavigate}
       >
         <img
-          className="w-fit"
+          className="w-full h-full object-cover"
           src={image ? image.medium : NoImage}
           alt="Show's image"
         />
@@ -56,18 +56,18 @@ export const ShowCard = ({ show }: ShowProps) => {
           <SummarySanitized summary={summary} isClamped={true} />
         </div>
         <div className="flex justify-between">
-          <div className="flex flex-col dark:brightness-75 dark:opacity-100 opacity-50">
+          <div className="flex min-w-10 flex-col dark:brightness-75 dark:opacity-100 opacity-50">
             {rating.average > 0 && (
-              <div className="flex flex-col">
+              <div className="flex flex-col md:text-sm sm:text-[10px] text-[10px]">
                 <p>Rating</p>
                 <p>{rating.average} / 10</p>
               </div>
             )}
           </div>
-          <ul className="flex items-end md:gap-1 gap-0.5 ">
+          <ul className="flex min-w-12 items-end md:gap-1 gap-0.5 ">
             {genres.map((genre, index) => (
               <li key={index}>
-                <p className="md:text-sm sm:text-sm text-xs brightness-50 dark:opacity-100 opacity-65">
+                <p className="md:text-[10px] sm:text-[8px] text-[8px] brightness-50 dark:opacity-100 opacity-65">
                   {genre}
                   {index !== genres.length - 1 ? ", " : ""}
                 </p>

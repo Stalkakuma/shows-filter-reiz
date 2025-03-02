@@ -10,7 +10,7 @@ export const SummarySanitized = ({ summary, isClamped }: SummaryProps) => {
 
   return (
     <p
-      className={isClamped ? "line-clamp-2" : ""}
+      className={`${isClamped ? "line-clamp-2" : ""} mr-4 md:text-md`}
       dangerouslySetInnerHTML={{ __html: sanitizedSummary }}
     />
   );

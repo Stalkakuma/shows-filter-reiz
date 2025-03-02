@@ -14,17 +14,25 @@ export const Navbar = () => {
         <li className="mt-auto mb-auto text-xl">
           <NavLink
             to="/"
-            className={({ isActive }) => (isActive ? "underline" : "")}
+            className={({ isActive }) =>
+              `${
+                isActive ? "underline" : ""
+              } hover:text-active-dark hover:brightness-120 duration-300 ease-in`
+            }
           >
-            Home
+            HOME
           </NavLink>
         </li>
         <li className="mt-auto mb-auto text-xl">
           <NavLink
-            className={({ isActive }) => (isActive ? "underline" : "")}
+            className={({ isActive }) =>
+              `${
+                isActive ? "underline" : ""
+              } hover:text-active-dark hover:brightness-120 duration-300 ease-in`
+            }
             to="/favorites"
           >
-            Favorites
+            FAVORITES
           </NavLink>
         </li>
       </ul>

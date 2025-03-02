@@ -10,6 +10,9 @@ export const Layout = ({ children }: PropsWithChildren) => {
       <main className="col-start-2 col-span-1 md:px-4 sm:px-8 px-16 mr-auto ml-auto  md:max-w-7xl">
         {children}
       </main>
+      <footer className="col-start-2 col-span-1 p-5 mr-auto ml-auto  md:max-w-7xl">
+        <p>© 2025 ReizTech</p>
+      </footer>
     </div>
   );
 };

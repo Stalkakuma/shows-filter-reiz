@@ -63,7 +63,7 @@ export const FiltersWidget = ({
 
   return (
     <section className="flex sm:flex-row   md:flex-row flex-col md:gap-4 sm:gap-2 gap-2 mb-5">
-      <div className="relative dark:bg-dormant-dark bg-dormant-light rounded-lg">
+      <div className="relative">
         <Button
           buttonValue={sortOrder}
           setIsOpen={setIsSortOpen}
@@ -88,14 +88,13 @@ export const FiltersWidget = ({
       </div>
 
       <div className="relative">
-        <button
-          className="md:w-full  dark:bg-dormant-dark bg-dormant-light  cursor-pointer  min-w-50 px-4 py-2 focus:ring-2 focus:ring-active-dark hover:border-active-dark border rounded-lg text-left "
-          onClick={() => setIsSelectGenresOpen(!isSelectGenresOpen)}
-        >
-          {`Selected Genres ${
+        <Button
+          buttonValue={`Selected Genres ${
             selectedGenres.length != 0 ? `(${selectedGenres.length})` : ""
           }`}
-        </button>
+          isOpen={isSelectGenresOpen}
+          setIsOpen={setIsSelectGenresOpen}
+        />
 
         {isSelectGenresOpen && (
           <div className="absolute w-full min-w-60 z-30 mt-2  bg-white dark:bg-background-dark border-2 rounded-xl shadow-lg overflow-hidden">

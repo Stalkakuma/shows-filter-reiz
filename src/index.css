@@ -34,13 +34,13 @@
 
   @media (max-width: 767px) {
     html {
-      @apply text-sm;
+      @apply text-xs;
     }
   }
 
   @media (max-width: 639px) {
     html {
-      @apply text-xs;
+      @apply text-sm;
     }
   }
 }

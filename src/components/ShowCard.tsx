@@ -29,10 +29,14 @@ export const ShowCard = ({ show }: ShowProps) => {
   return (
     <div className="flex z-10  rounded-sm dark:hover:shadow-dark hover:shadow-light">
       <div
-        className="md:min-w-35 sm:min-w-35 min-w-35 md:p-2 p-1  cursor-pointer"
+        className="md:w-35 sm:min-w-35 min-w-35 md:p-2 p-1  cursor-pointer"
         onClick={handleNavigate}
       >
-        <img src={image ? image.medium : NoImage} alt="Show's image" />
+        <img
+          className="w-fit"
+          src={image ? image.medium : NoImage}
+          alt="Show's image"
+        />
       </div>
       <div className="flex flex-col justify-between relative md:p-2 p-1">
         <button

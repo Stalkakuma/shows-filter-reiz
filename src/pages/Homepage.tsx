@@ -22,9 +22,10 @@ export const Homepage = () => {
   ];
 
   const statuses = ["All", ...new Set(showsData.map((show) => show.status))];
-  const allGenres = Array.from(
-    new Set(showsData.flatMap((show) => show.genres))
-  );
+  const allGenres = [
+    "No Genre",
+    ...new Set(showsData.flatMap((show) => show.genres)),
+  ];
 
   const genreToggle = (genre: string) => {
     setSelectedGenres((prev) =>
@@ -51,7 +52,9 @@ export const Homepage = () => {
     (show) =>
       (selectedStatus === "All" || show.status === selectedStatus) &&
       (selectedGenres.length === 0 ||
-        show.genres.every((genre) => selectedGenres.includes(genre)))
+        selectedGenres.length === 0 ||
+        show.genres.some((genre) => selectedGenres.includes(genre)) ||
+        (selectedGenres.includes("No Genre") && show.genres.length === 0))
   );
 
   const sortedShows =
@@ -94,7 +97,6 @@ export const Homepage = () => {
 
   return (
     <div className="flex flex-col">
-      {!filteredShows.length && <p>No Matches</p>}
       <FiltersWidget {...filteringProps} />
       <ShowList shows={currentShows} />
 

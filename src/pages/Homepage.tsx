@@ -91,14 +91,10 @@ export const Homepage = () => {
     genreToggle,
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col">
       <FiltersWidget {...filteringProps} />
-      <ShowList shows={currentShows} />
+      <ShowList shows={currentShows} isLoading={!isLoading} />
 
       <div className="flex justify-center mt-4 space-x-2">
         {getPaginationButtons(totalPages, currentPage).map((page, index) =>

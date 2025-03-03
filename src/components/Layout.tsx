@@ -7,7 +7,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       <header className="flex  items-center justify-center col-start-2 col-span-1 p-4">
         <Navbar />
       </header>
-      <main className="flex items-start justify-center col-start-2 col-span-1 p-4">
+      <main className="flex min-h-[80vh] items-start justify-center col-start-2 col-span-1 p-4">
         {children}
       </main>
       <footer className="flex items-center justify-center col-start-2 col-span-1 p-4">

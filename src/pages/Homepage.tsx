@@ -92,7 +92,7 @@ export const Homepage = () => {
   };
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex min-h-[80vh] w-full flex-col">
       <FiltersWidget {...filteringProps} />
       <ShowList shows={currentShows} isLoading={isLoading} />
 

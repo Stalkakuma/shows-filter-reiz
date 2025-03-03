@@ -62,7 +62,7 @@ export const FiltersWidget = ({
   };
 
   return (
-    <section className="flex sm:flex-row   md:flex-row flex-col md:gap-4 sm:gap-2 gap-2 mb-5">
+    <section className="flex min-h-20 sm:flex-row md:flex-row flex-col md:gap-4 sm:gap-2 gap-2 py-4">
       <div className="relative">
         <Button
           buttonValue={sortOrder}

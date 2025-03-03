@@ -27,7 +27,7 @@ export const ShowCard = ({ show }: ShowProps) => {
   };
 
   return (
-    <div className="flex min-h-60 z-10  rounded-sm dark:hover:shadow-dark hover:shadow-light">
+    <div className="flex min-h-60 z-10  rounded-sm dark:hover:shadow-dark hover:duration-80 hover:ease-in-out hover:shadow-light">
       <div
         className="h-full min-w-40 md:p-2 p-1 cursor-pointer"
         onClick={handleNavigate}

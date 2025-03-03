@@ -17,7 +17,7 @@ export const Navbar = () => {
             className={({ isActive }) =>
               `${
                 isActive ? "underline" : ""
-              } hover:text-active-dark hover:brightness-120 duration-300 ease-in`
+              } hover:text-active-dark hover:brightness-120 hover:duration-300 hover:ease-in`
             }
           >
             HOME
@@ -28,7 +28,7 @@ export const Navbar = () => {
             className={({ isActive }) =>
               `${
                 isActive ? "underline" : ""
-              } hover:text-active-dark hover:brightness-120 duration-300 ease-in`
+              } hover:text-active-dark hover:brightness-120 hover:duration-300 hover:ease-in`
             }
             to="/favorites"
           >

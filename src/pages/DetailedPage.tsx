@@ -53,7 +53,7 @@ export const DetailedPage = () => {
         <div>
           <h1>{showData?.name}</h1>
           <button
-            className={`cursor-pointer underline brightness-50 hover:text-active-dark hover:brightness-120 duration-300 ease-in ${
+            className={`cursor-pointer underline brightness-50 hover:text-active-dark hover:brightness-120 hover:duration-300 hover:ease-in ${
               isFavorite ? "text-active-dark brightness-100 " : ""
             }`}
             onClick={handleFavorite}
@@ -81,7 +81,7 @@ export const DetailedPage = () => {
           <p>
             Official site:{" "}
             <a
-              className="underline text-active-dark hover:brightness-120 duration-300 ease-in"
+              className="underline text-active-dark hover:brightness-120 hover:duration-300 hover:ease-in"
               href={showData.officialSite}
               target="_blank"
             >

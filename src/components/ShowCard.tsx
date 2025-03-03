@@ -38,21 +38,25 @@ export const ShowCard = ({ show }: ShowProps) => {
           alt="Show's image"
         />
       </div>
-      <div className="flex flex-col justify-between relative md:p-2 p-1">
-        <button
-          onClick={handleFavorite}
-          className="absolute cursor-pointer top-0 right-0 z-20 p-2"
-        >
-          <Heart
-            className={`${
-              isFavorite
-                ? "stroke-active-dark fill-active-dark"
-                : "stroke-heart-stroke dark:fill-none"
-            } dark:fill-heart-filled`}
-          />
-        </button>
-        <div className="cursor-pointer md:mr-0 mr-4" onClick={handleNavigate}>
-          <h2>{name}</h2>
+      <div className="flex flex-col justify-between md:p-2 p-1">
+        <div>
+          <div className="flex justify-between">
+            <h2 className="cursor-pointer" onClick={handleNavigate}>
+              {name}
+            </h2>
+            <button
+              onClick={handleFavorite}
+              className="cursor-pointer place-self-start z-20 p-2"
+            >
+              <Heart
+                className={`${
+                  isFavorite
+                    ? "stroke-active-dark fill-active-dark hover:fill-none hover:stroke-heart-stroke"
+                    : "stroke-heart-stroke dark:fill-none"
+                } dark:fill-heart-filled hover:fill-active-dark hover:stroke-active-dark hover:duration-400 hover:ease-in`}
+              />
+            </button>
+          </div>
           <SummarySanitized summary={summary} isClamped={true} />
         </div>
         <div className="flex justify-between">

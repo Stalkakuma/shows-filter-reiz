@@ -11,7 +11,7 @@ export const Navbar = () => {
         <ThemeToggle />
       </div>
       <ul className="flex gap-2">
-        <li className="mt-auto mb-auto text-xl">
+        <li className="mt-auto mb-auto md:text-xl">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -23,7 +23,7 @@ export const Navbar = () => {
             HOME
           </NavLink>
         </li>
-        <li className="mt-auto mb-auto text-xl">
+        <li className="mt-auto mb-auto md:text-xl">
           <NavLink
             className={({ isActive }) =>
               `${

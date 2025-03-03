@@ -1,10 +1,11 @@
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { ShowType } from "../types";
 import { getSpecificShow } from "../misc/apiShowService";
 import { SummarySanitized } from "../components/helpers/SummarySanitized";
 import { formatDate } from "../components/helpers/misc";
 import { useUserContext } from "../misc/UserContext";
+import NoImage from "../assets/No_Image.jpg";
 
 export const DetailedPage = () => {
   const { id } = useParams();
@@ -36,20 +37,30 @@ export const DetailedPage = () => {
     }
   };
 
+  const DetailedSection = ({ children }: PropsWithChildren) => (
+    <section className="grid place-self-center md:grid-cols-3 sm:grid-cols-2 grid-cols-1 grid-rows-[auto_auto]">
+      {children}
+    </section>
+  );
+
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <DetailedSection>
+        <div className="md:col-start-2 place-content-center w-10 h-10 border-4 border-t-transparent border-active-dark rounded-full animate-spin"></div>
+      </DetailedSection>
+    );
   }
 
   return (
-    <section className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 md:grid-rows-2 sm:grid-rows-2 row-auto">
+    <DetailedSection>
       <div className="col-start-1  md:row-span-2 md:p-2 p-1">
         <img
-          className="w-full h-full object-cover md:rounded-lg"
-          src={showData?.image.original}
+          className="min-h-full w-full h-full object-cover md:rounded-lg"
+          src={showData?.image?.original || NoImage}
           alt="Show's Image"
         />
       </div>
-      <div className="flex md:gap-8 gap-5 md:col-span-2 col-span-1 md:col-start-2 sm:col-start-2 col-start-1 flex-col sm:py-0 py-1 px-1 md:px-2">
+      <div className="flex md:gap-8 gap-5 md:col-span-2 col-span-1 md:col-start-2 sm:col-start-2 col-start-1 flex-col sm:py-0 px-1 py-2 md:p-2">
         <div>
           <h1>{showData?.name}</h1>
           <button
@@ -66,7 +77,7 @@ export const DetailedPage = () => {
           isClamped={false}
         />
       </div>
-      <div className="md:row-start-2 md:col-start-2  md:place-content-end md:p-2 p-1">
+      <div className="md:row-start-2 md:col-start-2 md:place-content-end md:p-2 p-1">
         {showData?.premiered && (
           <p>Premiered: {formatDate(showData.premiered)}</p>
         )}
@@ -100,6 +111,6 @@ export const DetailedPage = () => {
           </ul>
         )}
       </div>
-    </section>
+    </DetailedSection>
   );
 };

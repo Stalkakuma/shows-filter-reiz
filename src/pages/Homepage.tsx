@@ -94,7 +94,7 @@ export const Homepage = () => {
   return (
     <div className="flex w-full flex-col">
       <FiltersWidget {...filteringProps} />
-      <ShowList shows={currentShows} isLoading={!isLoading} />
+      <ShowList shows={currentShows} isLoading={isLoading} />
 
       <div className="flex justify-center mt-4 space-x-2">
         {getPaginationButtons(totalPages, currentPage).map((page, index) =>

@@ -4,14 +4,12 @@ import NoImage from "../assets/No_Image.jpg";
 import { useNavigate } from "react-router";
 import { useUserContext } from "../misc/UserContext";
 import Heart from "../assets/heart.svg?react";
-import { ShowSkeleton } from "./ShowSkeleton";
 
 type ShowProps = {
   show: ShowType;
-  isLoading?: boolean;
 };
 
-export const ShowCard = ({ show, isLoading }: ShowProps) => {
+export const ShowCard = ({ show }: ShowProps) => {
   const { id, name, image, summary, rating, genres } = show;
   const { user, addToFavorites, removeFromFavorites } = useUserContext();
   const isFavorite = user.favorites.includes(id);
@@ -27,10 +25,6 @@ export const ShowCard = ({ show, isLoading }: ShowProps) => {
       addToFavorites(id);
     }
   };
-
-  if (isLoading) {
-    return <ShowSkeleton />;
-  }
 
   return (
     <div className="flex min-h-60 z-10  rounded-sm dark:hover:shadow-dark hover:duration-80 hover:ease-in-out hover:shadow-light">

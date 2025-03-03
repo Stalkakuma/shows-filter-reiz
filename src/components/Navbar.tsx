@@ -6,7 +6,7 @@ import Logo from "../assets/logo.svg?react";
 export const Navbar = () => {
   return (
     <nav className="flex w-full justify-between">
-      <div className="flex">
+      <div className="flex place-items-center gap-5">
         <Logo className="w-40 dark:fill-active-dark fill-background-dark" />
         <ThemeToggle />
       </div>
